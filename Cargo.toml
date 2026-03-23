@@ -1,0 +1,24 @@
+
+[package]
+name = "nexcore-pvos"
+version = "1.0.0"
+edition = "2024"
+authors = ["NexVigilant Team <team@nexvigilant.com>"]
+license = "LicenseRef-Proprietary"
+repository = "https://github.com/nexvigilant/nexcore"
+rust-version = "1.85"
+description = "Pharmacovigilance Operating System — 15-layer T3 platform with T1 primitive grounding"
+
+[dependencies]
+nexcore-constants = { version = "1.0.0", path = "../nexcore-constants", registry = "nexcore" }
+nexcore-lex-primitiva = { version = "0.1.0", path = "../nexcore-lex-primitiva", registry = "nexcore" }
+serde = { version = "1.0.204", features = ["derive"] }
+serde_json = { version = "1.0.120" }
+sha2 = { version = "0.10.8" }
+rand = "0.9"
+
+[dev-dependencies]
+
+
+[lints]
+workspace = true
