@@ -1,40 +1,40 @@
 # nexcore-pvos
 
-The Pharmacovigilance Operating System (PVOS) substrate for the NexVigilant platform. This crate provides the low-level "kernel" services required to execute safety-critical PV workflows, including syscalls, driver management, and state machine transitions.
+Part of the [NexVigilant](https://nexvigilant.com) pharmacovigilance platform.
 
-## Intent
-To provide a robust, isolated environment for the execution of PV algorithms and safety rules. It abstracts hardware and OS-level concerns into PV-specific primitives like `syscall`, `bus`, and `fsm` (Finite State Machine).
+## About NexVigilant
 
-## T1 Grounding (Lex Primitiva)
-Dominant Primitives:
-- **ς (State)**: The core primitive for the FSM-based kernel and session lifecycle.
-- **μ (Mapping)**: Maps high-level PV commands to low-level kernel operations (syscalls).
-- **→ (Causality)**: Manages the sequence of event triggers and feedback loops.
-- **∂ (Boundary)**: Enforces process-level isolation and security boundaries (WAL, Signature).
-- **π (Persistence)**: Manages the Write-Ahead Log (WAL) and durable kernel state.
+NexVigilant makes pharmacovigilance accessible. We build open computation tools for drug safety signal detection, causality assessment, and regulatory intelligence — because patient safety knowledge should be available to everyone willing to learn.
 
-## Core Kernel Services
-- **Syscalls**: Standardized interface for interacting with the PVOS kernel.
-- **FSM Engine**: High-performance finite state machine for tracking case progression.
-- **Event Bus**: Low-latency internal messaging for kernel components.
-- **WAL (Write-Ahead Log)**: Ensures ACID compliance for safety-critical state changes.
-- **Supervisor**: Manages agent and process lifecycles with automated recovery.
+**Live tools:** [mcp.nexvigilant.com](https://mcp.nexvigilant.com) — 193 MCP tools for AI-powered pharmacovigilance, free to connect.
 
-## SOPs for Use
-### Interacting with the Kernel
-```rust
-use nexcore_pvos::kernel::Kernel;
-let mut kernel = Kernel::boot()?;
-let result = kernel.syscall(Command::DetectSignal(payload))?;
+## Installation
+
+```toml
+[dependencies]
+nexcore-pvos = { git = "https://github.com/nexvigilant/nexcore-pvos" }
 ```
 
-### Defining a State Transition
-Transitions are handled via the `fsm` module, requiring an explicit `Transition` record to ensure traceability and auditability.
-
-## Key Components
-- **Kernel**: The central coordinator for all PVOS services.
-- **Typestate**: Compile-time verification of valid kernel states.
-- **Backpressure**: Flow control mechanism for high-volume signal streams.
+> **Note:** This crate was developed as part of the [nexcore](https://github.com/nexvigilant) workspace. Some dependencies may reference workspace-level configuration. See individual `Cargo.toml` for details.
 
 ## License
-Proprietary. Copyright (c) 2026 NexVigilant LLC. All Rights Reserved.
+
+**Personal, non-commercial use only.** See [LICENSE](LICENSE) for full terms.
+
+Organizations of any kind must have explicit written permission for use.
+Contact [matthew@nexvigilant.com](mailto:matthew@nexvigilant.com) for licensing.
+
+## Contributing
+
+Contributions are welcome under the following terms:
+
+1. **Fork & PR.** Fork this repository, make your changes, and submit a pull request.
+2. **CLA.** By submitting a pull request, you agree that your contributions become the property of NexVigilant LLC under the same license terms.
+3. **Code quality.** All Rust code must pass `cargo clippy -- -D warnings` and `cargo fmt --check`.
+4. **Tests.** New functionality should include tests. Run `cargo test --lib` before submitting.
+
+For questions or discussion, open an issue or reach out at [matthew@nexvigilant.com](mailto:matthew@nexvigilant.com).
+
+---
+
+Built by [NexVigilant LLC](https://nexvigilant.com) — Pharmacovigilance for NexVigilants.
